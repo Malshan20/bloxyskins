@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 5.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 100% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 12 76% 61%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Gaming theme colors */
+    --neon-blue: 195 100% 50%;
+    --neon-purple: 265 100% 60%;
+    --neon-green: 135 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 25% 10%, rgba(var(--neon-purple), 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 75% 30%, rgba(var(--neon-blue), 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(var(--neon-green), 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-gaming tracking-wider;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/80;
+}
+
+/* Custom animations */
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(var(--primary), 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(var(--primary), 0.9));
+  }
+}
+
+.glow-effect {
+  animation: glow 3s infinite ease-in-out;
+}
+
+.gaming-card {
+  @apply relative overflow-hidden rounded-lg border border-border/50 bg-card p-4 transition-all duration-300;
+  box-shadow: 0 0 15px rgba(var(--primary), 0.1);
+}
+
+.gaming-card:hover {
+  box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+  transform: translateY(-5px);
+}
+
+.gaming-card::before {
+  content: "";
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: linear-gradient(45deg, rgba(var(--primary), 0.1), transparent);
+}
+
+.gaming-card:hover::before {
+  @apply opacity-100;
+}
+
+.neon-border {
+  @apply relative;
+}
+
+.neon-border::after {
+  content: "";
+  @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+  box-shadow: 0 0 10px rgba(var(--primary), 0.7);
+}
+
+.neon-border:hover::after {
+  @apply opacity-100;
+}
+
+.parallax-section {
+  @apply relative overflow-hidden;
+}
+
+.gaming-gradient-text {
+  @apply font-bold;
+  background: linear-gradient(90deg, #ff3a3a, #ff3a3a, #ff7e7e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: textShine 3s ease-in-out infinite alternate;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 100% center;
+  }
+}
+
+.gaming-button {
+  @apply relative overflow-hidden rounded-md bg-primary px-4 py-2 font-gaming text-white transition-all duration-300;
+  box-shadow: 0 0 10px rgba(var(--primary), 0.5);
+}
+
+.gaming-button:hover {
+  box-shadow: 0 0 15px rgba(var(--primary), 0.8);
+}
+
+.gaming-button::before {
+  content: "";
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.gaming-button:hover::before {
+  @apply opacity-100;
+}
+
