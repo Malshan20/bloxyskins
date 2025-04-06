@@ -44,14 +44,6 @@ To get a local copy up and running, follow these steps:
 
 5. **Open your browser** and go to `http://localhost:3000` to see the application in action.
 
-## Contributing
-
-Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - Thanks to the open-source community for the libraries and tools that made this project possible.
