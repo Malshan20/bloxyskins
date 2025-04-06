@@ -3,32 +3,18 @@
 import { useRef } from "react"
 import Image from "next/image"
 import { useMarketplace, type GameCategory } from "./marketplace-provider"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
 
 const gameImages: Record<string, string> = {
-  Limiteds: "/games/limiteds.jpg",
-  CS2: "/games/cs2.jpg",
-  "Dota 2": "/games/dota2.jpg",
-  Rust: "/games/rust.jpg",
-  "In Game": "/games/in-game.jpg",
+  Limiteds: "/games/limited.svg",
+  CS2: "/games/cs2.svg",
+  "Dota 2": "/games/dota2.svg",
+  Rust: "/games/rust.svg",
+  "In Game": "/games/in-game.svg",
 }
 
 export function GameCategories() {
   const { selectedCategory, setSelectedCategory } = useMarketplace()
   const containerRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    if (containerRef.current) {
-      gsap.from(".game-category", {
-        opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
-      })
-    }
-  }, [])
 
   const categories: GameCategory[] = ["Limiteds", "CS2", "Dota 2", "Rust", "In Game"]
 
@@ -61,4 +47,3 @@ export function GameCategories() {
     </div>
   )
 }
-

@@ -12,8 +12,6 @@ import { Switch } from "@/components/ui/switch"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/hooks/use-toast"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
 
 const siteSettingsSchema = z.object({
   siteName: z.string().min(2, {
@@ -49,23 +47,6 @@ export default function AdminSettings() {
   const [isSavingSite, setIsSavingSite] = useState(false)
   const [isSavingApi, setIsSavingApi] = useState(false)
   const { toast } = useToast()
-
-  useGSAP(() => {
-    gsap.from(".settings-title", {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    })
-
-    gsap.from(".settings-tabs", {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      delay: 0.2,
-      ease: "power3.out",
-    })
-  }, [])
 
   const siteForm = useForm<z.infer<typeof siteSettingsSchema>>({
     resolver: zodResolver(siteSettingsSchema),
@@ -119,16 +100,16 @@ export default function AdminSettings() {
 
   return (
     <div>
-      <h1 className="settings-title mb-8 font-gaming text-3xl text-primary">Settings</h1>
+      <h1 className="mb-8 text-3xl font-bold text-primary">Settings</h1>
 
-      <Tabs defaultValue="site" className="settings-tabs">
+      <Tabs defaultValue="site">
         <TabsList className="grid w-full grid-cols-2 md:w-[400px]">
           <TabsTrigger value="site">Site Settings</TabsTrigger>
           <TabsTrigger value="api">API Keys</TabsTrigger>
         </TabsList>
 
         <TabsContent value="site" className="mt-6">
-          <Card className="gaming-card">
+          <Card>
             <CardHeader>
               <CardTitle>Site Settings</CardTitle>
               <CardDescription>Manage your site settings and configurations</CardDescription>
@@ -143,7 +124,7 @@ export default function AdminSettings() {
                       <FormItem>
                         <FormLabel>Site Name</FormLabel>
                         <FormControl>
-                          <Input {...field} className="border-border/50 bg-background focus-visible:ring-primary" />
+                          <Input {...field} />
                         </FormControl>
                         <FormDescription>
                           The name of your site displayed in the browser tab and throughout the site
@@ -160,10 +141,7 @@ export default function AdminSettings() {
                       <FormItem>
                         <FormLabel>Site Description</FormLabel>
                         <FormControl>
-                          <Textarea
-                            {...field}
-                            className="min-h-20 border-border/50 bg-background focus-visible:ring-primary"
-                          />
+                          <Textarea {...field} className="min-h-20" />
                         </FormControl>
                         <FormDescription>Used for SEO and meta descriptions</FormDescription>
                         <FormMessage />
@@ -178,11 +156,7 @@ export default function AdminSettings() {
                       <FormItem>
                         <FormLabel>Contact Email</FormLabel>
                         <FormControl>
-                          <Input
-                            type="email"
-                            {...field}
-                            className="border-border/50 bg-background focus-visible:ring-primary"
-                          />
+                          <Input type="email" {...field} />
                         </FormControl>
                         <FormDescription>Primary contact email for the site</FormDescription>
                         <FormMessage />
@@ -195,7 +169,7 @@ export default function AdminSettings() {
                       control={siteForm.control}
                       name="maintenanceMode"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border/50 p-4">
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                           <div className="space-y-0.5">
                             <FormLabel className="text-base">Maintenance Mode</FormLabel>
                             <FormDescription>Put the site in maintenance mode</FormDescription>
@@ -211,7 +185,7 @@ export default function AdminSettings() {
                       control={siteForm.control}
                       name="allowRegistration"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border/50 p-4">
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                           <div className="space-y-0.5">
                             <FormLabel className="text-base">Allow Registration</FormLabel>
                             <FormDescription>Allow new users to register</FormDescription>
@@ -227,7 +201,7 @@ export default function AdminSettings() {
                       control={siteForm.control}
                       name="allowGuestCheckout"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border border-border/50 p-4">
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                           <div className="space-y-0.5">
                             <FormLabel className="text-base">Guest Checkout</FormLabel>
                             <FormDescription>Allow checkout without an account</FormDescription>
@@ -240,7 +214,7 @@ export default function AdminSettings() {
                     />
                   </div>
 
-                  <Button type="submit" className="gaming-button" disabled={isSavingSite}>
+                  <Button type="submit" disabled={isSavingSite}>
                     {isSavingSite ? "Saving..." : "Save Settings"}
                   </Button>
                 </form>
@@ -250,7 +224,7 @@ export default function AdminSettings() {
         </TabsContent>
 
         <TabsContent value="api" className="mt-6">
-          <Card className="gaming-card">
+          <Card>
             <CardHeader>
               <CardTitle>API Settings</CardTitle>
               <CardDescription>Configure your payment gateway API keys</CardDescription>
@@ -267,7 +241,7 @@ export default function AdminSettings() {
                         <FormItem>
                           <FormLabel>Public Key</FormLabel>
                           <FormControl>
-                            <Input {...field} className="border-border/50 bg-background focus-visible:ring-primary" />
+                            <Input {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -281,11 +255,7 @@ export default function AdminSettings() {
                         <FormItem>
                           <FormLabel>Secret Key</FormLabel>
                           <FormControl>
-                            <Input
-                              type="password"
-                              {...field}
-                              className="border-border/50 bg-background focus-visible:ring-primary"
-                            />
+                            <Input type="password" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -302,7 +272,7 @@ export default function AdminSettings() {
                         <FormItem>
                           <FormLabel>Client ID</FormLabel>
                           <FormControl>
-                            <Input {...field} className="border-border/50 bg-background focus-visible:ring-primary" />
+                            <Input {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -316,11 +286,7 @@ export default function AdminSettings() {
                         <FormItem>
                           <FormLabel>Client Secret</FormLabel>
                           <FormControl>
-                            <Input
-                              type="password"
-                              {...field}
-                              className="border-border/50 bg-background focus-visible:ring-primary"
-                            />
+                            <Input type="password" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -328,7 +294,7 @@ export default function AdminSettings() {
                     />
                   </div>
 
-                  <Button type="submit" className="gaming-button" disabled={isSavingApi}>
+                  <Button type="submit" disabled={isSavingApi}>
                     {isSavingApi ? "Saving..." : "Save API Settings"}
                   </Button>
                 </form>

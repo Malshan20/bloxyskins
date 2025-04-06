@@ -20,6 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { DiscordLogoIcon } from "@radix-ui/react-icons"
 
 const navLinks = [
   { name: "Market", href: "/" },
@@ -121,7 +122,7 @@ export default function Navbar() {
             size="sm"
             className="hidden md:flex items-center gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:text-primary"
           >
-            <Discord className="h-4 w-4" />
+           <DiscordLogoIcon className="h-4 w-4" />
             <span>Discord</span>
           </Button>
 
